@@ -204,7 +204,7 @@ function App() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/10 sm:p-8">
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/10 sm:p-8 min-h-[400px] flex flex-col">
               <div className="flex items-center gap-3 mb-6">
                 <div className="rounded-xl bg-cyan-400/10 p-2 text-cyan-300 ring-1 ring-cyan-300/20">
                   <MapPin className="h-5 w-5" />
@@ -216,7 +216,7 @@ function App() {
                 <div>DAS Off</div>
                 <div className="text-cyan-300">DAS On</div>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 flex-grow">
                 <Row label="Alert Time (s)" a={`${selected.base.alert}`} b={`${selected.das.alert}`} />
                 <Row
                   label="Serious Casualties"
@@ -235,7 +235,7 @@ function App() {
               </p>
             </div>
 
-            <div className="relative h-[520px] rounded-[2rem] border border-white/10 bg-slate-900 p-4 shadow-xl shadow-black/5 overflow-hidden">
+            <div className="relative h-[400px] rounded-[2rem] border border-white/10 bg-slate-900 p-4 shadow-xl shadow-black/5 overflow-hidden">
               <ComposableMap
                 projection="geoNaturalEarth1"
                 projectionConfig={{
