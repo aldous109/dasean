@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+  ZoomableGroup,
+} from "react-simple-maps";
 import {
   ArrowRight,
   Shield,
@@ -21,18 +27,18 @@ import {
 } from "lucide-react";
 
 const cities = [
-  { name: "Tokyo", x: 82, y: 28, base: { alert: 18, cas: 4200, dam: 6200, conf: 71 }, das: { alert: 29, cas: 3100, dam: 5100, conf: 86 } },
-  { name: "Osaka", x: 84, y: 33, base: { alert: 14, cas: 2500, dam: 4100, conf: 69 }, das: { alert: 24, cas: 1800, dam: 3300, conf: 84 } },
-  { name: "Manila", x: 86, y: 42, base: { alert: 10, cas: 3800, dam: 2900, conf: 63 }, das: { alert: 19, cas: 2800, dam: 2300, conf: 80 } },
-  { name: "Jakarta", x: 79, y: 54, base: { alert: 9, cas: 3400, dam: 2600, conf: 61 }, das: { alert: 17, cas: 2550, dam: 2100, conf: 79 } },
-  { name: "Mexico City", x: 18, y: 38, base: { alert: 22, cas: 2900, dam: 5400, conf: 74 }, das: { alert: 33, cas: 2100, dam: 4400, conf: 88 } },
-  { name: "Los Angeles", x: 12, y: 34, base: { alert: 16, cas: 1700, dam: 7200, conf: 72 }, das: { alert: 27, cas: 1200, dam: 6100, conf: 87 } },
-  { name: "San Francisco", x: 10, y: 28, base: { alert: 14, cas: 1400, dam: 6800, conf: 70 }, das: { alert: 25, cas: 950, dam: 5600, conf: 86 } },
-  { name: "Santiago", x: 22, y: 78, base: { alert: 19, cas: 2200, dam: 4800, conf: 73 }, das: { alert: 30, cas: 1600, dam: 3900, conf: 88 } },
-  { name: "Lima", x: 18, y: 68, base: { alert: 17, cas: 2600, dam: 4300, conf: 71 }, das: { alert: 28, cas: 1900, dam: 3500, conf: 86 } },
-  { name: "Istanbul", x: 56, y: 26, base: { alert: 8, cas: 6200, dam: 7600, conf: 60 }, das: { alert: 16, cas: 4700, dam: 6500, conf: 78 } },
-  { name: "Kathmandu", x: 70, y: 34, base: { alert: 7, cas: 4100, dam: 1800, conf: 58 }, das: { alert: 15, cas: 3000, dam: 1450, conf: 76 } },
-  { name: "Wellington", x: 96, y: 82, base: { alert: 13, cas: 900, dam: 2500, conf: 68 }, das: { alert: 23, cas: 620, dam: 2050, conf: 84 } },
+  { name: "Tokyo", lat: 35.6762, lng: 139.6503, base: { alert: 18, cas: 4200, dam: 6200, conf: 71 }, das: { alert: 29, cas: 3100, dam: 5100, conf: 86 } },
+  { name: "Osaka", lat: 34.6937, lng: 135.5023, base: { alert: 14, cas: 2500, dam: 4100, conf: 69 }, das: { alert: 24, cas: 1800, dam: 3300, conf: 84 } },
+  { name: "Manila", lat: 14.5995, lng: 120.9842, base: { alert: 10, cas: 3800, dam: 2900, conf: 63 }, das: { alert: 19, cas: 2800, dam: 2300, conf: 80 } },
+  { name: "Jakarta", lat: -6.2088, lng: 106.8456, base: { alert: 9, cas: 3400, dam: 2600, conf: 61 }, das: { alert: 17, cas: 2550, dam: 2100, conf: 79 } },
+  { name: "Mexico City", lat: 19.4326, lng: -99.1332, base: { alert: 22, cas: 2900, dam: 5400, conf: 74 }, das: { alert: 33, cas: 2100, dam: 4400, conf: 88 } },
+  { name: "Los Angeles", lat: 34.0522, lng: -118.2437, base: { alert: 16, cas: 1700, dam: 7200, conf: 72 }, das: { alert: 27, cas: 1200, dam: 6100, conf: 87 } },
+  { name: "San Francisco", lat: 37.7749, lng: -122.4194, base: { alert: 14, cas: 1400, dam: 6800, conf: 70 }, das: { alert: 25, cas: 950, dam: 5600, conf: 86 } },
+  { name: "Santiago", lat: -33.4489, lng: -70.6693, base: { alert: 19, cas: 2200, dam: 4800, conf: 73 }, das: { alert: 30, cas: 1600, dam: 3900, conf: 88 } },
+  { name: "Lima", lat: -12.0464, lng: -77.0428, base: { alert: 17, cas: 2600, dam: 4300, conf: 71 }, das: { alert: 28, cas: 1900, dam: 3500, conf: 86 } },
+  { name: "Istanbul", lat: 41.0082, lng: 28.9784, base: { alert: 8, cas: 6200, dam: 7600, conf: 60 }, das: { alert: 16, cas: 4700, dam: 6500, conf: 78 } },
+  { name: "Kathmandu", lat: 27.7172, lng: 85.3240, base: { alert: 7, cas: 4100, dam: 1800, conf: 58 }, das: { alert: 15, cas: 3000, dam: 1450, conf: 76 } },
+  { name: "Wellington", lat: -41.2865, lng: 174.7762, base: { alert: 13, cas: 900, dam: 2500, conf: 68 }, das: { alert: 23, cas: 620, dam: 2050, conf: 84 } },
 ];
 
 const roles = [
@@ -111,7 +117,7 @@ function App() {
                 <Activity className="h-4 w-4" />
               </div>
               <span className="font-bold text-lg bg-gradient-to-r from-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-                DAS Early Warning Initiative
+                DAS-enabled Earthquake Alert Network
               </span>
             </div>
             <div className="hidden items-center gap-6 text-sm md:flex">
@@ -138,10 +144,10 @@ function App() {
             </div>
             <div className="space-y-4">
               <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
-                Earlier Earthquake Warning from <span className="text-cyan-300">Existing Underwater Fiber</span>
+                Advanced Earthquake Detection using <span className="text-cyan-300">Existing Fiber Networks</span>
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-300">
-                Build a standardized DAS layer that turns submarine cables into trusted seismic sensors for faster alerts, better resilience, and richer predictive data.
+                Build a standardized DAS layer that turns submarine cables into trusted seismic sensors for earlier earthquake warnings, more resilient warning networks, and advanced predictive analytics.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -158,11 +164,14 @@ function App() {
                 Join the Team <Users className="h-4 w-4" />
               </a>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+          </div>
+
+          <div className="space-y-6">
+            <div className="grid gap-4 sm:grid-cols-1">
               {[
-                "We already have the fiber",
-                "The obstacle is standardization",
-                "One pilot can unlock scale",
+                "Add acoustic sensing to undersea fiber networks",
+                "Standardize the data pipeline",
+                "Train ML model for advanced earthquake detection",
               ].map((item, i) => (
                 <div
                   key={i}
@@ -226,48 +235,65 @@ function App() {
               </p>
             </div>
 
-            <div className="relative h-[520px] rounded-[2rem] border border-white/10 bg-white/5 p-4 shadow-xl shadow-black/5">
-              <div className="absolute inset-0 opacity-30">
-                <div className="absolute left-8 top-1/2 h-px w-[110%] bg-white/10" />
-                <div className="absolute left-8 top-[20%] h-px w-[110%] bg-white/10" />
-                <div className="absolute left-8 top-[80%] h-px w-[110%] bg-white/10" />
-              </div>
+            <div className="relative h-[520px] rounded-[2rem] border border-white/10 bg-slate-900 p-4 shadow-xl shadow-black/5 overflow-hidden">
               <ComposableMap
-                projection="geoMercator"
-                projectionConfig={{ scale: 95 }}
-                className="h-full w-full"
+                projection="geoNaturalEarth1"
+                projectionConfig={{
+                  scale: 140,
+                  center: [0, 0],
+                }}
+                className="w-full h-full"
               >
-                <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
-                  {({ geographies }) =>
-                    geographies.map((geo) => (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill="rgba(255,255,255,0.08)"
-                        stroke="rgba(103,232,249,0.35)"
-                        strokeWidth={0.3}
-                      />
-                    ))
-                  }
-                </Geographies>
-                {cities.map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setSelected(c)}
-                    className="absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ left: c.x + "%", top: c.y + "%" }}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full transition ${
-                        selected.name === c.name ? "bg-cyan-300 scale-125 ring-2 ring-cyan-300/50" : "bg-white"
-                      }`}
-                    />
-                    <div className="mt-1 whitespace-nowrap rounded bg-slate-950/80 px-2 py-1 text-xs text-slate-200">
-                      {c.name}
-                    </div>
-                  </button>
-                ))}
+                <ZoomableGroup zoom={1} center={[0, 20]}>
+                  <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
+                    {({ geographies }) =>
+                      geographies.map((geo) => (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill="#1e293b"
+                          stroke="#334155"
+                          strokeWidth={0.5}
+                          style={{
+                            default: { outline: "none" },
+                            hover: { outline: "none" },
+                            pressed: { outline: "none" },
+                          }}
+                        />
+                      ))
+                    }
+                  </Geographies>
+                  {cities.map((city) => (
+                    <Marker key={city.name} coordinates={[city.lng, city.lat]}>
+                      <g
+                        className="cursor-pointer transition-transform hover:scale-110"
+                        onClick={() => setSelected(city)}
+                      >
+                        <circle
+                          r={selected.name === city.name ? 6 : 4}
+                          fill={selected.name === city.name ? "#06b6d4" : "#ffffff"}
+                          stroke={selected.name === city.name ? "#06b6d4" : "#ffffff"}
+                          strokeWidth={selected.name === city.name ? 2 : 1}
+                          className={selected.name === city.name ? "drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" : "drop-shadow-[0_0_4px_rgba(255,255,255,0.6)]"}
+                        />
+                        <text
+                          textAnchor="middle"
+                          y={selected.name === city.name ? -12 : -10}
+                          className={`text-xs font-medium ${
+                            selected.name === city.name ? "fill-cyan-300" : "fill-slate-200"
+                          }`}
+                          style={{ fontSize: selected.name === city.name ? "12px" : "10px" }}
+                        >
+                          {city.name}
+                        </text>
+                      </g>
+                    </Marker>
+                  ))}
+                </ZoomableGroup>
               </ComposableMap>
+              <div className="absolute bottom-4 right-4 rounded-2xl border border-white/10 bg-slate-950/70 px-3 py-2 text-xs text-slate-300 backdrop-blur-sm">
+                Click city markers to compare impact
+              </div>
             </div>
           </div>
         </motion.section>
