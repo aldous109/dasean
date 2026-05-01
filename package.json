@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://aldous109.github.io/dasean",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
