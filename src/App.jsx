@@ -182,141 +182,121 @@ function App() {
               ))}
             </div>
           </div>
-        </motion.section>
+         </motion.section>
 
-        <motion.section
-          id="map"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="py-16"
-        >
-          <div className="mb-8 max-w-3xl">
-            <div className="text-sm uppercase tracking-[0.3em] text-cyan-300/80">
-              Global DAS Network
-            </div>
-            <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
-              Interactive City Impact Comparison
-            </h2>
-            <p className="mt-3 text-lg text-slate-300">
-              Click a city to compare illustrative outcomes with and without a standardized DAS layer.
-            </p>
-          </div>
-
+         <motion.section
+           id="map"
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ duration: 0.7, delay: 0.2 }}
+           className="py-16"
+         >
+           <div className="mb-8 max-w-3xl">
+             <div className="text-sm uppercase tracking-[0.3em] text-cyan-300/80">
+               Global DAS Network
+             </div>
+             <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
+               Interactive City Impact Comparison
+             </h2>
+             <p className="mt-3 text-lg text-slate-300">
+               Click a city to compare illustrative outcomes with and without a standardized DAS layer.
+             </p>
            </div>
 
-           <motion.section
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 0.7 }}
-             className="py-16"
-           >
-             <div className="mb-8 max-w-3xl">
-               <div className="text-sm uppercase tracking-[0.3em] text-cyan-300/80">
-                 Global DAS Network
+           <div className="grid gap-8 lg:grid-cols-2">
+             <div className="rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-cyan-950/10 h-[400px] flex flex-col p-6">
+               <div className="flex items-center gap-3 mb-6">
+                 <div className="rounded-xl bg-cyan-400/10 p-2 text-cyan-300 ring-1 ring-cyan-300/20">
+                   <MapPin className="h-5 w-5" />
+                 </div>
+                 <h3 className="text-2xl font-semibold text-white">{selected.name}</h3>
                </div>
-               <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
-                 Interactive City Impact Comparison
-               </h2>
-               <p className="mt-3 text-lg text-slate-300">
-                 Click a city to compare illustrative outcomes with and without a standardized DAS layer.
+               <div className="grid grid-cols-3 gap-2 text-xs uppercase tracking-wide text-slate-500 border-b pb-3">
+                 <div>Metric</div>
+                 <div>DAS Off</div>
+                 <div className="text-cyan-300">DAS On</div>
+               </div>
+               <div className="space-y-1">
+                 <Row label="Alert Time (s)" a={`${selected.base.alert}`} b={`${selected.das.alert}`} />
+                 <Row
+                   label="Serious Casualties"
+                   a={selected.base.cas.toLocaleString()}
+                   b={selected.das.cas.toLocaleString()}
+                 />
+                 <Row
+                   label="Damage ($M)"
+                   a={selected.base.dam.toLocaleString()}
+                   b={selected.das.dam.toLocaleString()}
+                 />
+                 <Row label="Confidence (%)" a={selected.base.conf} b={selected.das.conf} />
+               </div>
+               <p className="mt-4 text-xs text-slate-500">
+                 Illustrative scenario estimates for public engagement only.
                </p>
              </div>
 
-             <div className="grid gap-8 lg:grid-cols-2">
-               <div className="rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-cyan-950/10 h-[400px] flex flex-col p-6">
-                 <div className="flex items-center gap-3 mb-6">
-                   <div className="rounded-xl bg-cyan-400/10 p-2 text-cyan-300 ring-1 ring-cyan-300/20">
-                     <MapPin className="h-5 w-5" />
-                   </div>
-                   <h3 className="text-2xl font-semibold text-white">{selected.name}</h3>
-                 </div>
-                 <div className="grid grid-cols-3 gap-2 text-xs uppercase tracking-wide text-slate-500 border-b pb-3">
-                   <div>Metric</div>
-                   <div>DAS Off</div>
-                   <div className="text-cyan-300">DAS On</div>
-                 </div>
-                 <div className="space-y-1">
-                   <Row label="Alert Time (s)" a={`${selected.base.alert}`} b={`${selected.das.alert}`} />
-                   <Row
-                     label="Serious Casualties"
-                     a={selected.base.cas.toLocaleString()}
-                     b={selected.das.cas.toLocaleString()}
-                   />
-                   <Row
-                     label="Damage ($M)"
-                     a={selected.base.dam.toLocaleString()}
-                     b={selected.das.dam.toLocaleString()}
-                   />
-                   <Row label="Confidence (%)" a={selected.base.conf} b={selected.das.conf} />
-                 </div>
-                 <p className="mt-4 text-xs text-slate-500">
-                   Illustrative scenario estimates for public engagement only.
-                 </p>
-               </div>
-
-               <div className="relative h-[400px] rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/5 overflow-hidden">
-                 <ComposableMap
-                   projection="geoNaturalEarth1"
-                   projectionConfig={{
-                     scale: 160,
-                     center: [30, 0],
-                   }}
-                   className="w-full h-full"
-                 >
-                   <ZoomableGroup zoom={1} center={[0, 0]}>
-                     <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
-                       {({ geographies }) =>
-                         geographies.map((geo) => (
-                           <Geography
-                             key={geo.rsmKey}
-                             geography={geo}
-                             fill="#1e293b"
-                             stroke="#334155"
-                             strokeWidth={0.5}
-                             style={{
-                               default: { outline: "none" },
-                               hover: { outline: "none" },
-                               pressed: { outline: "none" },
-                             }}
-                           />
-                         ))
-                       }
-                     </Geographies>
-                     {cities.map((city) => (
-                       <Marker key={city.name} coordinates={[city.lng, city.lat]}>
-                         <g
-                           className="cursor-pointer transition-transform hover:scale-110"
-                           onClick={() => setSelected(city)}
+             <div className="relative h-[400px] rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/5 overflow-hidden">
+               <ComposableMap
+                 projection="geoNaturalEarth1"
+                 projectionConfig={{
+                   scale: 160,
+                   center: [30, 0],
+                 }}
+                 className="w-full h-full"
+               >
+                 <ZoomableGroup zoom={1} center={[0, 0]}>
+                   <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
+                     {({ geographies }) =>
+                       geographies.map((geo) => (
+                         <Geography
+                           key={geo.rsmKey}
+                           geography={geo}
+                           fill="#1e293b"
+                           stroke="#334155"
+                           strokeWidth={0.5}
+                           style={{
+                             default: { outline: "none" },
+                             hover: { outline: "none" },
+                             pressed: { outline: "none" },
+                           }}
+                         />
+                       ))
+                     }
+                   </Geographies>
+                   {cities.map((city) => (
+                     <Marker key={city.name} coordinates={[city.lng, city.lat]}>
+                       <g
+                         className="cursor-pointer transition-transform hover:scale-110"
+                         onClick={() => setSelected(city)}
+                       >
+                         <circle
+                           r={selected.name === city.name ? 6.6 : 4.4}
+                           fill={selected.name === city.name ? "#06b6d4" : "#ffffff"}
+                           stroke={selected.name === city.name ? "#06b6d4" : "#ffffff"}
+                           strokeWidth={selected.name === city.name ? 2 : 1}
+                           className={selected.name === city.name ? "drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" : "drop-shadow-[0_0_4px_rgba(255,255,255,0.6)]"}
+                         />
+                         <text
+                           textAnchor="middle"
+                           y={selected.name === city.name ? -12 : -10}
+                           className={`text-xs font-medium ${
+                             selected.name === city.name ? "fill-cyan-300" : "fill-slate-200"
+                           }`}
+                           style={{ fontSize: selected.name === city.name ? "16px" : "14px" }}
                          >
-                           <circle
-                             r={selected.name === city.name ? 6.6 : 4.4}
-                             fill={selected.name === city.name ? "#06b6d4" : "#ffffff"}
-                             stroke={selected.name === city.name ? "#06b6d4" : "#ffffff"}
-                             strokeWidth={selected.name === city.name ? 2 : 1}
-                             className={selected.name === city.name ? "drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" : "drop-shadow-[0_0_4px_rgba(255,255,255,0.6)]"}
-                           />
-                           <text
-                             textAnchor="middle"
-                             y={selected.name === city.name ? -12 : -10}
-                             className={`text-xs font-medium ${
-                               selected.name === city.name ? "fill-cyan-300" : "fill-slate-200"
-                             }`}
-                             style={{ fontSize: selected.name === city.name ? "16px" : "14px" }}
-                           >
-                             {city.name}
-                           </text>
-                         </g>
-                       </Marker>
-                     ))}
-                   </ZoomableGroup>
-                 </ComposableMap>
-                 <div className="absolute bottom-4 right-4 rounded-2xl border border-white/10 bg-slate-950/70 px-3 py-2 text-xs text-slate-300 backdrop-blur-sm">
-                   Click city markers to compare impact
-                 </div>
+                           {city.name}
+                         </text>
+                       </g>
+                     </Marker>
+                   ))}
+                 </ZoomableGroup>
+               </ComposableMap>
+               <div className="absolute bottom-4 right-4 rounded-2xl border border-white/10 bg-slate-950/70 px-3 py-2 text-xs text-slate-300 backdrop-blur-sm">
+                 Click city markers to compare impact
                </div>
              </div>
-           </motion.section>
+           </div>
+         </motion.section>
                 <h3 className="text-2xl font-semibold text-white">{selected.name}</h3>
               </div>
               <div className="grid grid-cols-3 gap-2 text-xs uppercase tracking-wide text-slate-500 border-b pb-3">
