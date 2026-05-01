@@ -166,22 +166,18 @@ function App() {
             </div>
           </div>
 
-          <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-1">
-              {[
-                "Add acoustic sensing to undersea fiber networks",
-                "Standardize the data pipeline",
-                "Train ML model for advanced earthquake detection",
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/10"
-                >
-                  <div className="text-sm leading-6 text-slate-200">{item}</div>
-                </div>
-              ))}
+            <div className="space-y-6">
+              <iframe
+                width="100%"
+                height="315"
+                src="https://www.youtube.com/embed/rfscVS0vtbw"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="rounded-2xl shadow-lg shadow-black/10"
+              ></iframe>
             </div>
-          </div>
          </motion.section>
 
          <motion.section
