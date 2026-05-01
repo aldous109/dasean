@@ -204,7 +204,7 @@ function App() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/10 sm:p-8 min-h-[400px] flex flex-col">
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-cyan-950/10 h-[400px] flex flex-col p-6">
               <div className="flex items-center gap-3 mb-6">
                 <div className="rounded-xl bg-cyan-400/10 p-2 text-cyan-300 ring-1 ring-cyan-300/20">
                   <MapPin className="h-5 w-5" />
@@ -216,7 +216,7 @@ function App() {
                 <div>DAS Off</div>
                 <div className="text-cyan-300">DAS On</div>
               </div>
-              <div className="space-y-1 flex-grow">
+              <div className="space-y-1">
                 <Row label="Alert Time (s)" a={`${selected.base.alert}`} b={`${selected.das.alert}`} />
                 <Row
                   label="Serious Casualties"
@@ -235,16 +235,16 @@ function App() {
               </p>
             </div>
 
-            <div className="relative h-[400px] rounded-[2rem] border border-white/10 bg-slate-900 p-4 shadow-xl shadow-black/5 overflow-hidden">
+            <div className="relative h-[400px] rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/5 overflow-hidden">
               <ComposableMap
                 projection="geoNaturalEarth1"
                 projectionConfig={{
-                  scale: 140,
-                  center: [0, 0],
+                  scale: 160,
+                  center: [30, 0],
                 }}
                 className="w-full h-full"
               >
-                <ZoomableGroup zoom={1} center={[0, 20]}>
+                <ZoomableGroup zoom={1} center={[0, 0]}>
                   <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
                     {({ geographies }) =>
                       geographies.map((geo) => (
@@ -270,7 +270,7 @@ function App() {
                         onClick={() => setSelected(city)}
                       >
                         <circle
-                          r={selected.name === city.name ? 6 : 4}
+                          r={selected.name === city.name ? 6.6 : 4.4}
                           fill={selected.name === city.name ? "#06b6d4" : "#ffffff"}
                           stroke={selected.name === city.name ? "#06b6d4" : "#ffffff"}
                           strokeWidth={selected.name === city.name ? 2 : 1}
@@ -282,7 +282,7 @@ function App() {
                           className={`text-xs font-medium ${
                             selected.name === city.name ? "fill-cyan-300" : "fill-slate-200"
                           }`}
-                          style={{ fontSize: selected.name === city.name ? "12px" : "10px" }}
+                          style={{ fontSize: selected.name === city.name ? "16px" : "14px" }}
                         >
                           {city.name}
                         </text>
@@ -364,6 +364,9 @@ function App() {
         >
           <div className="mx-auto max-w-3xl px-6">
             <h2 className="mb-6 text-4xl font-semibold">Join the Experiment</h2>
+            <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
+              Whether you bring expertise in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
+            </p>
             <div className="grid gap-4 md:grid-cols-2">
               <input
                 value={name}
