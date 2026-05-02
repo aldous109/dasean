@@ -117,7 +117,7 @@ function App() {
                 <Activity className="h-4 w-4" />
               </div>
               <span className="font-bold text-lg bg-gradient-to-r from-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-                DAS-enabled Earthquake Alert Network
+                DAS-enabled Early Alert Network
               </span>
             </div>
             <div className="hidden items-center gap-6 text-sm md:flex">
@@ -170,7 +170,7 @@ function App() {
               <iframe
                 width="100%"
                 height="315"
-                src="https://www.youtube.com/embed/rfscVS0vtbw"
+                src="https://www.youtube.com/embed/esIMngdLCUo"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
