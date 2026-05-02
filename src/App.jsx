@@ -117,7 +117,7 @@ function App() {
                 <Activity className="h-4 w-4" />
               </div>
               <span className="font-bold text-lg bg-gradient-to-r from-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-                DAS-enabled Early Alert Network
+                DAS-enabled Earthquake Alert Network
               </span>
             </div>
             <div className="hidden items-center gap-6 text-sm md:flex">
@@ -137,19 +137,13 @@ function App() {
           transition={{ duration: 0.7 }}
           className="grid gap-12 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"
         >
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-200">
-              <Shield className="h-4 w-4" />
-              Public-Interest Seismic Infrastructure
-            </div>
-            <div className="space-y-4">
-              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
-                Advanced Earthquake Detection using <span className="text-cyan-300">Existing Fiber Networks</span>
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-300">
-                Build a standardized DAS layer that turns submarine cables into trusted seismic sensors for earlier earthquake warnings, more resilient warning networks, and advanced predictive analytics.
-              </p>
-            </div>
+           <div className="space-y-4">
+             <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+               Advanced Earthquake Detection using <span className="text-cyan-300">Existing Fiber Networks</span>
+             </h1>
+             <p className="max-w-2xl text-lg leading-8 text-slate-300">
+               Build a standardized DAS layer that turns submarine cables into trusted seismic sensors for earlier earthquake warnings, more resilient warning networks, and advanced predictive analytics.
+             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#map"
@@ -227,7 +221,7 @@ function App() {
                  <Row label="Confidence (%)" a={selected.base.conf} b={selected.das.conf} />
                </div>
                <p className="mt-4 text-xs text-slate-500">
-                 Illustrative scenario estimates for public engagement only.
+                 Illustrative scenario estimates for public engagement only. Note that several cities shown (e.g. Kathmandu, Istanbul, Mexico City) are not near submarine cables. The DAS gain for them comes from denser land fiber integration, not offshore cables. 
                </p>
              </div>
 
@@ -328,9 +322,9 @@ function App() {
         >
           <div className="mx-auto max-w-6xl px-6">
             <div className="mb-2 text-sm uppercase tracking-[0.3em] text-cyan-300/80">
-              Collaboration
+              Building the Future of EEW
             </div>
-            <h2 className="mb-10 text-4xl font-semibold text-white">Build the Team</h2>
+            <h2 className="mb-10 text-4xl font-semibold text-white">Collaborative Roles</h2>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {roles.map((role) => {
                 const Icon = role.icon;
@@ -359,9 +353,9 @@ function App() {
           className="rounded-[2rem] border border-white/10 bg-gradient-to-r from-cyan-500 to-indigo-600 py-16 text-slate-950"
         >
           <div className="mx-auto max-w-3xl px-6">
-            <h2 className="mb-6 text-4xl font-semibold">Join the Experiment</h2>
+            <h2 className="mb-6 text-4xl font-semibold">Connect with the Project</h2>
             <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
-              Whether you bring expertise in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
+              Whether your expertise is in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               <input
@@ -397,7 +391,7 @@ function App() {
               />
             </div>
             <button className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.01]">
-              Submit Interest <ArrowRight className="h-4 w-4" />
+              Send message <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </motion.section>
