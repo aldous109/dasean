@@ -250,7 +250,7 @@ function App() {
                  <Row label="Confidence (%)" a={selected.base.conf} b={selected.das.conf} />
                </div>
                <p className="mt-4 text-xs text-slate-500">
-                 Illustrative scenario estimates for public engagement only. Several of the cities shown (e.g. Kathmandu, Istanbul, Mexico City) are not near submarine cables. For these cities the DAS-enabled system comes from land fiber being more densely integrated than conventional seismic networks. 
+                 Illustrative scenario estimates for public engagement only. Several of the cities shown (e.g. Kathmandu, Istanbul, Mexico City) are not near submarine cables. For these cities the DAS advantage comes from land fiber being more densely integrated than conventional seismic networks. 
                </p>
              </div>
 
