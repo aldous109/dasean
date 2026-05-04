@@ -105,10 +105,33 @@ function App() {
   const [expertise, setExpertise] = useState("");
   const [help, setHelp] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitError("");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch(e.target.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json();
+        setSubmitError(data.error || "Unable to send message. Please try again.");
+      }
+    } catch (error) {
+      setSubmitError("Unable to send message. Please check your connection and try again.");
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
@@ -414,6 +437,11 @@ function App() {
                     required
                     className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30 md:col-span-2"
                   />
+                  {submitError && (
+                    <div className="md:col-span-2 rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-200 ring-1 ring-red-300/20">
+                      {submitError}
+                    </div>
+                  )}
                   <button type="submit" className="mt-6 md:col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.01]">
                     Send message <ArrowRight className="h-4 w-4" />
                   </button>
