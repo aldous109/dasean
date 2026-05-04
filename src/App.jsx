@@ -171,7 +171,7 @@ function App() {
                Advanced Earthquake Detection using <span className="text-cyan-300">Existing Fiber Networks</span>
              </h1>
              <p className="max-w-2xl text-lg leading-8 text-slate-300">
-               Build a standardized DAS layer that turns submarine cables into trusted seismic sensors for earlier earthquake warnings, more resilient warning networks, and advanced predictive analytics.
+               We're building a standardized DAS layer that turns submarine cables into trusted seismic sensors for <b>earlier earthquake warnings</b>, and <b>advanced predictive analytics</b>.
              </p>
             <div className="flex flex-wrap gap-3">
               <a
