@@ -104,6 +104,12 @@ function App() {
   const [affiliation, setAffiliation] = useState("");
   const [expertise, setExpertise] = useState("");
   const [help, setHelp] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
@@ -328,15 +334,8 @@ function App() {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {roles.map((role) => {
                 const Icon = role.icon;
-                const [submitted, setSubmitted] = useState(false);
 
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     setSubmitted(true);
-     // Formspree handles the actual submission via the form action
-   };
-
-   return (
+                return (
                   <div
                     key={role.title}
                     className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10"
