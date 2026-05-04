@@ -328,7 +328,15 @@ function App() {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {roles.map((role) => {
                 const Icon = role.icon;
-                return (
+                const [submitted, setSubmitted] = useState(false);
+
+   const handleSubmit = (e) => {
+     e.preventDefault();
+     setSubmitted(true);
+     // Formspree handles the actual submission via the form action
+   };
+
+   return (
                   <div
                     key={role.title}
                     className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10"
@@ -348,51 +356,71 @@ function App() {
         <motion.section
           id="join"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.8 }}
           className="rounded-[2rem] border border-white/10 bg-gradient-to-r from-cyan-500 to-indigo-600 py-16 text-slate-950"
         >
           <div className="mx-auto max-w-3xl px-6">
             <h2 className="mb-6 text-4xl font-semibold">Connect with the Project</h2>
-            <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
-              Whether your expertise is in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
-            </p>
-            <div className="grid gap-4 md:grid-cols-2">
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-                className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
-              />
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
-              />
-              <input
-                value={affiliation}
-                onChange={(e) => setAffiliation(e.target.value)}
-                placeholder="Affiliation"
-                className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
-              />
-              <input
-                value={expertise}
-                onChange={(e) => setExpertise(e.target.value)}
-                placeholder="Expertise"
-                className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
-              />
-              <textarea
-                value={help}
-                onChange={(e) => setHelp(e.target.value)}
-                placeholder="How would you like to help?"
-                rows={4}
-                className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30 md:col-span-2"
-              />
-            </div>
-            <button className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.01]">
-              Send message <ArrowRight className="h-4 w-4" />
-            </button>
+            {submitted ? (
+              <p className="text-lg text-slate-800">Thank you! We'll be in touch.</p>
+            ) : (
+              <>
+                <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
+                  Whether your expertise is in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
+                </p>
+                <form
+                  action="https://formspree.io/f/mnjwpjkz"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                  className="grid gap-4 md:grid-cols-2"
+                >
+                  <input
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
+                    required
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
+                  />
+                  <input
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    required
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
+                  />
+                  <input
+                    name="affiliation"
+                    value={affiliation}
+                    onChange={(e) => setAffiliation(e.target.value)}
+                    placeholder="Affiliation"
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
+                  />
+                  <input
+                    name="expertise"
+                    value={expertise}
+                    onChange={(e) => setExpertise(e.target.value)}
+                    placeholder="Expertise"
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
+                  />
+                  <textarea
+                    name="help"
+                    value={help}
+                    onChange={(e) => setHelp(e.target.value)}
+                    placeholder="How would you like to help?"
+                    rows={4}
+                    required
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30 md:col-span-2"
+                  />
+                  <button type="submit" className="mt-6 md:col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.01]">
+                    Send message <ArrowRight className="h-4 w-4" />
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </motion.section>
       </main>
