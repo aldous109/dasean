@@ -41,6 +41,16 @@ const cities = [
   { name: "Wellington", lat: -41.2865, lng: 174.7762, base: { alert: 13, cas: 900, dam: 2500, conf: 68 }, das: { alert: 23, cas: 620, dam: 2050, conf: 84 } },
 ];
 
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil",
+  "Canada", "Chile", "China", "Colombia", "Denmark", "Egypt", "Finland", "France", "Germany", "Greece", "India",
+  "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Jordan", "Kenya", "Malaysia", "Mexico",
+  "Morocco", "Netherlands", "New Zealand", "Norway", "Pakistan", "Peru", "Philippines", "Poland", "Portugal",
+  "Russia", "Saudi Arabia", "Singapore", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland",
+  "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Vietnam",
+  "Other"
+];
+
 const roles = [
   {
     title: "DAS / Fiber Engineering",
@@ -77,7 +87,7 @@ const roles = [
 const objectives = [
   "Standardize the DAS seismic reporting pipeline",
   "Seed a repo of ground-truth calibrated DAS data",
-  "Train an ML model for early earthquake detection",
+  "Train a ML model for early earthquake detection",
 ];
 
 const roadmap = [
@@ -102,9 +112,9 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [affiliation, setAffiliation] = useState("");
-  const [expertise, setExpertise] = useState("");
   const [help, setHelp] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [country, setCountry] = useState("");
   const [submitError, setSubmitError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -389,7 +399,7 @@ function App() {
             ) : (
               <>
                 <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
-                  Whether your area is seismology, fiber engineering, ML, field deployment, partnerships, or simply helping to accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a reliable seismic sensing layer for earlier warnings and predictive earthquake analytics!
+                  Whether your field is seismology, fiber engineering, ML, field deployment, partnerships, or simply helping to accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a reliable seismic sensing layer for earlier warnings and predictive earthquake analytics!
                 </p>
                 <form
                   action="https://formspree.io/f/mnjwpjkz"
@@ -421,13 +431,19 @@ function App() {
                     placeholder="Affiliation"
                     className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
                   />
-                  <input
-                    name="expertise"
-                    value={expertise}
-                    onChange={(e) => setExpertise(e.target.value)}
-                    placeholder="Expertise"
-                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-cyan-300/30"
-                  />
+                  <select
+                    name="country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="w-full rounded-xl bg-white/90 px-4 py-3 text-slate-900 outline-none focus:ring-2 focus:ring-cyan-300/30"
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map((countryName) => (
+                      <option key={countryName} value={countryName}>
+                        {countryName}
+                      </option>
+                    ))}
+                  </select>
                   <textarea
                     name="help"
                     value={help}
