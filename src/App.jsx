@@ -75,9 +75,9 @@ const roles = [
 ];
 
 const objectives = [
-  "Standardize the reporting pipeline",
-  "Validate the DAS instrument model",
-  "Benchmark improved EEW performance",
+  "Standardize the DAS seismic reporting pipeline",
+  "Seed a repo of ground-truth calibrated DAS data",
+  "Train an ML model for early earthquake detection",
 ];
 
 const roadmap = [
@@ -171,7 +171,7 @@ function App() {
                Advanced Earthquake Detection using <span className="text-cyan-300">Existing Fiber Networks</span>
              </h1>
              <p className="max-w-2xl text-lg leading-8 text-slate-300">
-               We're building a standardized DAS layer that turns submarine cables into trusted seismic sensors for <b>earlier earthquake warnings</b>, and <b>advanced predictive analytics</b>.
+               We're adding a DAS (Distributed Acousting Sensing) layer to turn undersea internet cables into sprawling seismic sensors for <b>earlier earthquake warnings</b> and <b>advanced predictive analytics</b>.
              </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -212,7 +212,7 @@ function App() {
          >
            <div className="mb-8 max-w-3xl">
              <div className="text-sm uppercase tracking-[0.3em] text-cyan-300/80">
-               Global DAS Network
+               Why a Global DAS Network?
              </div>
              <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
                Interactive City Impact Comparison
@@ -250,7 +250,7 @@ function App() {
                  <Row label="Confidence (%)" a={selected.base.conf} b={selected.das.conf} />
                </div>
                <p className="mt-4 text-xs text-slate-500">
-                 Illustrative scenario estimates for public engagement only. Note that several cities shown (e.g. Kathmandu, Istanbul, Mexico City) are not near submarine cables. The DAS gain for them comes from denser land fiber integration, not offshore cables. 
+                 Illustrative scenario estimates for public engagement only. Several of the cities shown (e.g. Kathmandu, Istanbul, Mexico City) are not near submarine cables. For these cities the DAS-enabled system comes from land fiber being more densely integrated than conventional seismic networks. 
                </p>
              </div>
 
@@ -353,7 +353,7 @@ function App() {
             <div className="mb-2 text-sm uppercase tracking-[0.3em] text-cyan-300/80">
               Building the Future of EEW
             </div>
-            <h2 className="mb-10 text-4xl font-semibold text-white">Collaborative Roles</h2>
+            <h2 className="mb-10 text-4xl font-semibold text-white">Collaborators Needed</h2>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {roles.map((role) => {
                 const Icon = role.icon;
@@ -389,7 +389,7 @@ function App() {
             ) : (
               <>
                 <p className="mb-8 text-lg leading-relaxed text-slate-200 max-w-2xl">
-                  Whether your expertise is in seismology, fiber engineering, ML, field deployment, partnerships, or simply the capacity to help accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a trusted seismic sensing layer for earlier warnings and more resilient communities.
+                  Whether your area is seismology, fiber engineering, ML, field deployment, partnerships, or simply helping to accelerate this work, we'd love to connect. Together, we can build the open infrastructure that turns existing fiber into a reliable seismic sensing layer for earlier warnings and predictive earthquake analytics!
                 </p>
                 <form
                   action="https://formspree.io/f/mnjwpjkz"
